@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành xưởng LABS - Version 1.4</title>
+    <title>Thực hành xưởng LABS - Version 1.5</title>
     <style>
         :root { --primary: #2980b9; --dark: #2c3e50; --success: #27ae60; --warning: #f39c12; --danger: #e74c3c; --bg: #f8f9fa; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; background-color: var(--bg); max-width: 1000px; margin: auto; }
@@ -65,12 +65,12 @@
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Bề rộng tối thiểu <b>915mm</b>. Khoảng cách di chuyển tối đa: <b>61m</b> (không sprinkler) hoặc <b>76m</b> (có sprinkler). Không được dẫn qua khu vực rủi ro cháy đặc biệt.
+                        <b>Tiêu chuẩn LABS:</b> Bề rộng tối thiểu <b>915mm</b>. Khoảng cách di chuyển tối đa: <b>61m</b> (không sprinkler) hoặc <b>76m</b> (có sprinkler).
                     </div>
-                    <label>Ghi nhận hiện trạng (vật cản, bề rộng thực tế, khoảng cách):</label>
-                    <textarea placeholder="Kiểm tra xe đẩy, hàng hóa lấn chiếm, độ dốc hành lang (<10 độ)..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_LoiDi')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra vật cản, lấn chiếm lối đi..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_LoiDi')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -82,46 +82,46 @@
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Mở theo hướng di chuyển, <b>không dùng cửa trượt/cuốn/treo</b>. Bề rộng cửa tính theo <b>5mm/người</b> (min 810mm). Phải mở được từ bên trong không cần chìa khóa (thanh đẩy panic).
+                        <b>Tiêu chuẩn LABS:</b> Mở theo hướng di chuyển, <b>không dùng cửa trượt/cuốn</b>. Bề rộng 5mm/người (min 810mm). Thanh đẩy panic bắt buộc cho phòng >50 người.
                     </div>
-                    <label>Ghi nhận (hướng mở, loại cửa, tình trạng khóa/xích):</label>
-                    <textarea placeholder="Kiểm tra cửa có bị khóa xích từ bên ngoài không? Có thanh đẩy thoát hiểm không?"></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_Cua')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra ổ khóa, hướng mở, loại cửa..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_Cua')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
 
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.3 Kết cấu Ngăn cháy & Khu vực Rủi ro cao
+                    1.3 Kết cấu Ngăn cháy & Kho hóa chất
                     <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Ngăn cháy <b>1 giờ</b> (lối thoát kết nối ≤3 tầng) hoặc <b>2 giờ</b> (≥4 tầng). Kho hóa chất phải ngăn cháy 1h và có khay chống tràn (cao min 100mm). Cửa ngăn cháy phải tự đóng.
+                        <b>Tiêu chuẩn LABS:</b> Ngăn cháy 1h-2h tùy số tầng. Kho hóa chất ngăn cháy 1h và có khay chống tràn. Cửa ngăn cháy phải có cơ chế tự đóng.
                     </div>
-                    <label>Ghi nhận (tường ngăn, cửa chống cháy, kho hóa chất, trục thông tầng):</label>
-                    <textarea placeholder="Kiểm tra các lỗ hổng trên sàn/tường, cơ chế tự đóng của cửa ngăn cháy, khay hóa chất..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_NganChay')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra tường ngăn cháy, khay chống tràn hóa chất..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_NganChay')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
 
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.4 Báo cháy, Chuông & Đèn sự cố
+                    1.4 Hệ thống báo cháy & Đèn sự cố
                     <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Đèn sự cố duy trì <b>90 phút</b>, cường độ min 10 lux trên đường thoát nạn. Chuông báo cháy >10dBA so với nền (min 65dB). Biển Exit phải được chiếu sáng liên tục.
+                        <b>Tiêu chuẩn LABS:</b> Đèn sự cố duy trì 90 phút (min 10 lux). Chuông báo cháy >65dB. Biển Exit phải được chiếu sáng liên tục.
                     </div>
-                    <label>Ghi nhận (tình trạng đầu dò, nút nhấn, độ sáng đèn sự cố):</label>
-                    <textarea placeholder="Thử nghiệm đèn sự cố, kiểm tra vị trí lắp đặt biển chỉ dẫn (trong vòng 2m từ đối tượng)..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_ThietBi')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra đầu dò, nút nhấn, đèn Exit..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_ThietBi')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -142,46 +142,46 @@
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Khoảng trống thao tác trước tủ min <b>1m</b>. Không chứa vật liệu dễ cháy bên trong. Vệ sinh sạch xơ bụi vải để tránh phát tia lửa. Có biển cảnh báo nguy hiểm.
+                        <b>Tiêu chuẩn LABS:</b> Khoảng trống thao tác 1m. Không chứa vật liệu dễ cháy. Vệ sinh sạch xơ bụi vải. Có nắp che chắn điện áp.
                     </div>
-                    <label>Ghi nhận (vệ sinh, khoảng cách thao tác, nắp che chắn):</label>
-                    <textarea placeholder="Kiểm tra xơ bụi vải tích tụ, vật dụng để trên nóc tủ, tình trạng đấu nối..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_TuDien')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra bụi vải, khoảng cách thao tác, đấu nối..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Elec_TuDien')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
 
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    2.2 Đo nhiệt độ hệ thống điện (Thermography)
+                    2.2 Đo nhiệt độ hệ thống điện (IR)
                     <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Ghi nhận khi chênh lệch <b>>20°C</b> so với môi trường. <b>Hành động ngay lập tức</b> khi nhiệt độ >70°C hoặc chênh lệch <b>>30°C</b> so với môi trường.
+                        <b>Tiêu chuẩn LABS:</b> Delta T >20°C (Theo dõi); Delta T >30°C hoặc T >70°C (<b>Xử lý ngay lập tức</b>).
                     </div>
-                    <label>Ghi nhận nhiệt độ đo được tại các điểm đấu nối:</label>
-                    <textarea placeholder="Ghi tên tủ, vị trí MCB/đầu nối quá nhiệt, giá trị nhiệt độ cụ thể..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_NhietDo')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận nhiệt độ:</label>
+                    <textarea placeholder="Ghi nhận giá trị nhiệt độ tại các điểm đấu nối MCB, đầu cáp..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Elec_NhietDo')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
 
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    2.3 Trạm biến áp & Máy phát điện dự phòng
+                    2.3 Trạm biến áp & Máy phát
                     <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Phòng máy phát phải thông gió tốt, ống xả khí thải nối ra ngoài và cao hơn tòa nhà. Trạm biến áp không được làm kho chứa rác/chất dễ cháy. Hệ thống tiếp địa phải đảm bảo.
+                        <b>Tiêu chuẩn LABS:</b> Thông gió tốt, ống xả cao hơn mái. Không dùng trạm điện làm kho. Hệ thống tiếp địa đảm bảo.
                     </div>
-                    <label>Ghi nhận (thông gió, ống xả, vệ sinh khu vực trạm):</label>
-                    <textarea placeholder="Kiểm tra đê ngăn dầu tràn máy phát, tình trạng dây tiếp địa, biển cảnh báo trạm điện..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_TramPhat')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra vệ sinh trạm, dầu tràn, tiếp địa..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Elec_TramPhat')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -201,12 +201,12 @@
                 </div>
                 <div class="item-content">
                     <div class="standard-box">
-                        <b>Tiêu chuẩn LABS:</b> Phân loại <b>Mức Đỏ</b> khi có nguy cơ sụp đổ hoặc khuyết điểm gây nguy hiểm tức thì. Kiểm tra tải trọng làm việc phù hợp với thiết kế. Bậc thang tối đa 215mm, chênh lệch giữa các bậc <50mm.
+                        <b>Tiêu chuẩn LABS:</b> Báo động đỏ khi có nguy cơ sụp đổ. Tải trọng hàng hóa < thiết kế. Bậc thang max 215mm. Lan can cả 2 bên.
                     </div>
-                    <label>Ghi nhận (vết nứt dầm/cột, tình trạng võng sàn, chất hàng quá tải):</label>
-                    <textarea placeholder="Mô tả vị trí vết nứt (nếu có), độ cao chất hàng, lan can cầu thang (phải có ở cả 2 bên, cao tối đa 1120mm)..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Struct_Check')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <label>Ghi nhận hiện trạng:</label>
+                    <textarea placeholder="Kiểm tra vết nứt dầm/cột, võng sàn, chất hàng quá tải..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Struct_Check')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp trực tiếp / Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
