@@ -3,62 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành xưởng LABS - Version 1.3</title>
+    <title>Thực hành xưởng LABS - Version 1.4</title>
     <style>
-        :root { --primary: #3498db; --dark: #2c3e50; --success: #27ae60; --bg: #f4f4f9; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: var(--bg); max-width: 900px; margin: auto; }
-        h1 { color: var(--dark); text-align: center; margin-bottom: 30px; text-transform: uppercase; border-bottom: 3px solid var(--primary); padding-bottom: 10px; }
+        :root { --primary: #2980b9; --dark: #2c3e50; --success: #27ae60; --warning: #f39c12; --danger: #e74c3c; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; background-color: var(--bg); max-width: 1000px; margin: auto; }
+        h1 { color: var(--dark); text-align: center; text-transform: uppercase; border-bottom: 4px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; }
         
-        /* Category Styles */
-        .category { background: #fff; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #ddd; overflow: hidden; }
-        .category-header { background: var(--primary); color: white; padding: 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1em; transition: 0.3s; }
-        .category-header:hover { background: #2980b9; }
+        /* Accordion Structure */
+        .category { background: #fff; margin-bottom: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #dee2e6; overflow: hidden; }
+        .category-header { background: var(--primary); color: white; padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.15em; }
         .category-content { display: none; padding: 15px; background: #fff; }
-        
         .category.active > .category-content { display: block; }
         .category.active > .category-header { background: var(--dark); }
 
-        /* Sub-item (Check-item) Styles */
-        .check-item { background: #fff; margin-bottom: 8px; border: 1px solid #eee; border-radius: 6px; }
-        .item-header { padding: 12px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #444; background: #f8f9fa; border-left: 4px solid transparent; }
-        .item-header:hover { background: #f1f1f1; }
-        .item-content { display: none; padding: 20px; border-top: 1px solid #eee; }
-        
+        .check-item { background: #fff; margin-bottom: 10px; border: 1px solid #edf2f7; border-radius: 8px; }
+        .item-header { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #4a5568; background: #f7fafc; border-left: 5px solid transparent; transition: 0.2s; }
+        .item-content { display: none; padding: 20px; border-top: 1px solid #edf2f7; }
         .check-item.active > .item-content { display: block; }
-        .check-item.active > .item-header { border-left-color: var(--success); background: #eef2f7; color: var(--dark); }
+        .check-item.active > .item-header { border-left-color: var(--success); background: #ebf8ff; color: var(--primary); }
 
-        /* Form elements */
-        label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--dark); font-size: 0.95em; }
+        /* Content Details */
+        .standard-box { background: #fffaf0; border: 1px solid #feebc8; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 0.9em; color: #744210; }
+        .standard-box b { color: var(--danger); }
+        
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--dark); }
         textarea { 
-            width: 100%; 
-            min-height: 180px; /* To gấp đôi yêu cầu ban đầu */
-            padding: 15px; 
-            border: 2px solid #dfe6e9; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-family: inherit;
-            font-size: 15px;
-            resize: vertical;
-            background-color: #fff;
-            transition: border-color 0.3s;
+            width: 100%; min-height: 200px; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; 
+            box-sizing: border-box; font-family: inherit; font-size: 15px; resize: vertical; margin-bottom: 15px;
         }
-        textarea:focus { border-color: var(--primary); outline: none; }
+        textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2); }
 
+        /* Photo UI */
         .btn-capture { 
-            background: var(--success); color: white; border: none; padding: 12px 20px; border-radius: 6px; 
-            cursor: pointer; margin-top: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--success); color: white; border: none; padding: 12px 24px; border-radius: 8px; 
+            cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 10px;
         }
-        .btn-capture:active { transform: translateY(1px); }
-        
-        .photo-container { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 15px; }
-        .photo-wrapper { text-align: center; width: 140px; background: #f9f9f9; padding: 5px; border-radius: 6px; border: 1px solid #eee; }
-        .photo-preview { width: 130px; height: 130px; object-fit: cover; border-radius: 4px; }
-        .img-name { font-size: 0.65em; color: #666; margin-top: 5px; word-break: break-all; line-height: 1.2; }
-        
-        .arrow { transition: transform 0.3s; opacity: 0.7; }
-        .active > .category-header .arrow, .active > .item-header .arrow { transform: rotate(180deg); opacity: 1; }
-        
-        .desc { font-size: 0.85em; color: #7f8c8d; font-weight: normal; margin-top: 4px; display: block; }
+        .photo-container { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+        .photo-wrapper { background: #f1f5f9; padding: 8px; border-radius: 8px; text-align: center; border: 1px solid #e2e8f0; }
+        .photo-preview { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 5px; }
+        .img-name { font-size: 0.7em; color: #64748b; word-break: break-all; }
+
+        .arrow { transition: transform 0.3s; }
+        .active .arrow { transform: rotate(180deg); }
     </style>
 </head>
 <body>
@@ -67,37 +53,75 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            1. HỆ THỐNG THOÁT NẠN (MEANS OF EGRESS)
-            <svg class="arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+            I. AN TOÀN PHÒNG CHÁY CHỮA CHÁY (FIRE SAFETY)
+            <svg class="arrow" width="24" height="24" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
         </div>
         <div class="category-content">
+            
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.1 Đường và lối thoát nạn (Aisles)
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                    1.1 Lối đi và Hành lang thoát nạn
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
-                    <label>Tiêu chuẩn: Thông thoáng, không vật cản, rộng tối thiểu 915mm.
-                        <span class="desc">Kiểm tra xe đẩy, hàng hóa có lấn chiếm lối đi không?</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Egress_Aisle')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Bề rộng tối thiểu <b>915mm</b>. Khoảng cách di chuyển tối đa: <b>61m</b> (không sprinkler) hoặc <b>76m</b> (có sprinkler). Không được dẫn qua khu vực rủi ro cháy đặc biệt.
+                    </div>
+                    <label>Ghi nhận hiện trạng (vật cản, bề rộng thực tế, khoảng cách):</label>
+                    <textarea placeholder="Kiểm tra xe đẩy, hàng hóa lấn chiếm, độ dốc hành lang (<10 độ)..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_LoiDi')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
+
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.2 Cửa thoát hiểm (Exit Doors)
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                    1.2 Cửa thoát nạn & Cơ chế mở
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
-                    <label>Tiêu chuẩn: Mở ra ngoài, không khóa, không dùng cửa cuốn/trượt.
-                        <span class="desc">Kiểm tra ổ khóa, xích, hoặc các chốt chặn cửa.</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Egress_Door')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Mở theo hướng di chuyển, <b>không dùng cửa trượt/cuốn/treo</b>. Bề rộng cửa tính theo <b>5mm/người</b> (min 810mm). Phải mở được từ bên trong không cần chìa khóa (thanh đẩy panic).
+                    </div>
+                    <label>Ghi nhận (hướng mở, loại cửa, tình trạng khóa/xích):</label>
+                    <textarea placeholder="Kiểm tra cửa có bị khóa xích từ bên ngoài không? Có thanh đẩy thoát hiểm không?"></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_Cua')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <div class="photo-container"></div>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
+                    1.3 Kết cấu Ngăn cháy & Khu vực Rủi ro cao
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                </div>
+                <div class="item-content">
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Ngăn cháy <b>1 giờ</b> (lối thoát kết nối ≤3 tầng) hoặc <b>2 giờ</b> (≥4 tầng). Kho hóa chất phải ngăn cháy 1h và có khay chống tràn (cao min 100mm). Cửa ngăn cháy phải tự đóng.
+                    </div>
+                    <label>Ghi nhận (tường ngăn, cửa chống cháy, kho hóa chất, trục thông tầng):</label>
+                    <textarea placeholder="Kiểm tra các lỗ hổng trên sàn/tường, cơ chế tự đóng của cửa ngăn cháy, khay hóa chất..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_NganChay')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <div class="photo-container"></div>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
+                    1.4 Báo cháy, Chuông & Đèn sự cố
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                </div>
+                <div class="item-content">
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Đèn sự cố duy trì <b>90 phút</b>, cường độ min 10 lux trên đường thoát nạn. Chuông báo cháy >10dBA so với nền (min 65dB). Biển Exit phải được chiếu sáng liên tục.
+                    </div>
+                    <label>Ghi nhận (tình trạng đầu dò, nút nhấn, độ sáng đèn sự cố):</label>
+                    <textarea placeholder="Thử nghiệm đèn sự cố, kiểm tra vị trí lắp đặt biển chỉ dẫn (trong vòng 2m từ đối tượng)..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_ThietBi')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -106,37 +130,58 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            2. NGĂN CHÁY & PCCC (FIRE PROTECTION)
-            <svg class="arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+            II. AN TOÀN ĐIỆN (ELECTRICAL SAFETY)
+            <svg class="arrow" width="24" height="24" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
         </div>
         <div class="category-content">
+            
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    2.1 Vách ngăn cháy & Trục thông tầng
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                    2.1 Tủ điện & Thiết bị đóng cắt
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
-                    <label>Tiêu chuẩn: Ngăn cách khu vực sản xuất với kho, văn phòng, nhà ăn.
-                        <span class="desc">Kiểm tra các lỗ thủng trên tường ngăn cháy hoặc trục kỹ thuật.</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Fire_Compartment')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Khoảng trống thao tác trước tủ min <b>1m</b>. Không chứa vật liệu dễ cháy bên trong. Vệ sinh sạch xơ bụi vải để tránh phát tia lửa. Có biển cảnh báo nguy hiểm.
+                    </div>
+                    <label>Ghi nhận (vệ sinh, khoảng cách thao tác, nắp che chắn):</label>
+                    <textarea placeholder="Kiểm tra xơ bụi vải tích tụ, vật dụng để trên nóc tủ, tình trạng đấu nối..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_TuDien')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
+
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    2.2 Hệ thống báo cháy & Đèn sự cố
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                    2.2 Đo nhiệt độ hệ thống điện (Thermography)
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
-                    <label>Tiêu chuẩn: Đèn sự cố hoạt động 90p, biển Exit không bị che khuất.
-                        <span class="desc">Kiểm tra nút nhấn khẩn cấp và đầu dò khói.</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Fire_Alarm')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Ghi nhận khi chênh lệch <b>>20°C</b> so với môi trường. <b>Hành động ngay lập tức</b> khi nhiệt độ >70°C hoặc chênh lệch <b>>30°C</b> so với môi trường.
+                    </div>
+                    <label>Ghi nhận nhiệt độ đo được tại các điểm đấu nối:</label>
+                    <textarea placeholder="Ghi tên tủ, vị trí MCB/đầu nối quá nhiệt, giá trị nhiệt độ cụ thể..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_NhietDo')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
+                    <div class="photo-container"></div>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
+                    2.3 Trạm biến áp & Máy phát điện dự phòng
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                </div>
+                <div class="item-content">
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Phòng máy phát phải thông gió tốt, ống xả khí thải nối ra ngoài và cao hơn tòa nhà. Trạm biến áp không được làm kho chứa rác/chất dễ cháy. Hệ thống tiếp địa phải đảm bảo.
+                    </div>
+                    <label>Ghi nhận (thông gió, ống xả, vệ sinh khu vực trạm):</label>
+                    <textarea placeholder="Kiểm tra đê ngăn dầu tràn máy phát, tình trạng dây tiếp địa, biển cảnh báo trạm điện..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_TramPhat')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -145,37 +190,23 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            3. AN TOÀN ĐIỆN (ELECTRICAL SAFETY)
-            <svg class="arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+            III. AN TOÀN KẾT CẤU (STRUCTURAL SAFETY)
+            <svg class="arrow" width="24" height="24" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
         </div>
         <div class="category-content">
             <div class="check-item">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    3.1 Tủ điện & Vệ sinh công nghiệp
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
+                    3.1 Biến dạng, Vết nứt & Tải trọng
+                    <svg class="arrow" width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
                 </div>
                 <div class="item-content">
-                    <label>Tiêu chuẩn: Không tích tụ bụi vải, không chứa vật liệu dễ cháy bên trong.
-                        <span class="desc">Kiểm tra khoảng trống an toàn trước tủ điện (915mm).</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_Panel')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
-                    <div class="photo-container"></div>
-                </div>
-            </div>
-            <div class="check-item">
-                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    3.2 Kiểm tra Camera nhiệt (Thermography)
-                    <svg class="arrow" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 5 5-5z"/></svg>
-                </div>
-                <div class="item-content">
-                    <label>Tiêu chuẩn: Nhiệt độ đầu nối < 70°C hoặc chênh lệch < 30°C.
-                        <span class="desc">Ghi lại các điểm tiếp xúc quá nhiệt bất thường.</span>
-                    </label>
-                    <textarea placeholder="Ghi nhận thông số nhiệt độ đo được..."></textarea>
-                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Elec_IR')" style="display:none">
-                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình thực tế</button>
+                    <div class="standard-box">
+                        <b>Tiêu chuẩn LABS:</b> Phân loại <b>Mức Đỏ</b> khi có nguy cơ sụp đổ hoặc khuyết điểm gây nguy hiểm tức thì. Kiểm tra tải trọng làm việc phù hợp với thiết kế. Bậc thang tối đa 215mm, chênh lệch giữa các bậc <50mm.
+                    </div>
+                    <label>Ghi nhận (vết nứt dầm/cột, tình trạng võng sàn, chất hàng quá tải):</label>
+                    <textarea placeholder="Mô tả vị trí vết nứt (nếu có), độ cao chất hàng, lan can cầu thang (phải có ở cả 2 bên, cao tối đa 1120mm)..."></textarea>
+                    <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Struct_Check')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 Chụp/Chọn hình</button>
                     <div class="photo-container"></div>
                 </div>
             </div>
@@ -184,18 +215,11 @@
 
     <script>
         function toggleAccordion(element, type) {
-            const parentContainer = element.parentElement;
-            const isAlreadyActive = parentContainer.classList.contains('active');
-
-            // Chỉ thu gọn các mục cùng cấp (Siblings)
-            const siblings = parentContainer.parentElement.querySelectorAll(':scope > .' + type);
-            siblings.forEach(sibling => {
-                sibling.classList.remove('active');
-            });
-
-            if (!isAlreadyActive) {
-                parentContainer.classList.add('active');
-            }
+            const parent = element.parentElement;
+            const isAlreadyActive = parent.classList.contains('active');
+            const siblings = parent.parentElement.querySelectorAll(':scope > .' + type);
+            siblings.forEach(s => s.classList.remove('active'));
+            if (!isAlreadyActive) parent.classList.add('active');
         }
 
         function handleFiles(input, itemName) {
@@ -209,19 +233,11 @@
             files.forEach((file, index) => {
                 const reader = new FileReader();
                 const fileNameCustom = `${dateStr}_${itemName}_${index + 1}.jpg`;
-                
                 reader.onload = function(e) {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'photo-wrapper';
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'photo-preview';
-                    const nameLabel = document.createElement('div');
-                    nameLabel.className = 'img-name';
-                    nameLabel.innerText = fileNameCustom;
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(nameLabel);
-                    container.appendChild(wrapper);
+                    const wrap = document.createElement('div');
+                    wrap.className = 'photo-wrapper';
+                    wrap.innerHTML = `<img src="${e.target.result}" class="photo-preview"><div class="img-name">${fileNameCustom}</div>`;
+                    container.appendChild(wrap);
                 }
                 reader.readAsDataURL(file);
             });
