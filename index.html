@@ -3,101 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LABS Onsite v1.8 - Mobile Optimized</title>
+    <title>LABS Onsite Pro - Version 1.9</title>
     <style>
         :root { 
             --primary: #2980b9; --dark: #2c3e50; --success: #27ae60; 
             --warning: #f39c12; --danger: #e74c3c; --bg: #f4f7f6;
-            --text: #333;
         }
-        
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.5; padding: 10px; background-color: var(--bg); color: var(--text); margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.5; padding: 10px; background-color: var(--bg); color: #333; margin: 0;
         }
+        h1 { font-size: 1.3rem; color: var(--dark); text-align: center; margin: 15px 0; text-transform: uppercase; }
 
-        h1 { 
-            font-size: 1.25rem; color: var(--dark); text-align: center; 
-            margin: 15px 0; text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        /* Container cho các mục lớn */
         .category { background: #fff; margin-bottom: 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; overflow: hidden; }
-        
-        .category-header { 
-            background: var(--primary); color: white; padding: 16px; cursor: pointer; 
-            display: flex; justify-content: space-between; align-items: center; font-weight: bold;
-        }
-
+        .category-header { background: var(--primary); color: white; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
         .category-content { display: none; padding: 8px; background: #fff; }
         .category.active > .category-content { display: block; }
         .category.active > .category-header { background: var(--dark); }
 
-        /* Mục con (Check-item) */
         .check-item { background: #fff; margin-bottom: 8px; border: 1px solid #f0f0f0; border-radius: 10px; }
-        
-        .item-header { 
-            padding: 14px; cursor: pointer; display: flex; justify-content: space-between; 
-            align-items: center; font-weight: 600; font-size: 0.95rem; color: #444; background: #fafafa;
-        }
-        
+        .item-header { padding: 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.9rem; color: #444; background: #fafafa; }
         .item-content { display: none; padding: 12px; border-top: 1px solid #f0f0f0; }
         .check-item.active > .item-content { display: block; }
         .check-item.active > .item-header { background: #eef6fc; border-left: 4px solid var(--primary); }
 
-        /* Bộ công cụ tính toán - Tối ưu Mobile */
+        /* Tiêu chuẩn chi tiết */
+        .std-list { margin: 0 0 12px 0; padding-left: 18px; font-size: 0.85rem; color: #555; }
+        .std-list li { margin-bottom: 5px; }
+        .std-important { color: var(--danger); font-weight: bold; }
+
+        /* Calculators */
         .calc-box { background: #f0f7ff; border: 1px solid #d0e7ff; padding: 12px; border-radius: 8px; margin-bottom: 15px; }
-        .calc-box h4 { margin: 0 0 10px 0; font-size: 0.85rem; color: var(--primary); }
-        
         .calc-group { margin-bottom: 10px; }
         .calc-group label { display: block; font-size: 0.8rem; margin-bottom: 4px; color: #666; }
+        .calc-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-weight: bold; }
+        .calc-result { margin-top: 10px; padding: 12px; border-radius: 6px; font-weight: bold; text-align: center; font-size: 0.9rem; display: none; }
+
+        textarea { width: 100%; min-height: 140px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 12px; }
+        .btn-capture { width: 100%; background: var(--success); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 8px; }
         
-        .calc-input { 
-            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; 
-            font-size: 1rem; font-weight: bold; background: #fff; appearance: none;
-        }
-
-        .calc-result { 
-            margin-top: 10px; padding: 12px; border-radius: 6px; font-weight: bold; 
-            text-align: center; font-size: 0.9rem; display: none; 
-        }
-
-        /* Ghi chú & Textarea */
-        .standard-info { font-size: 0.8rem; color: #856404; background: #fff3cd; padding: 10px; border-radius: 6px; margin-bottom: 12px; border-left: 3px solid #ffeeba; }
-        
-        textarea { 
-            width: 100%; min-height: 160px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; 
-            font-size: 1rem; font-family: inherit; resize: none; margin-bottom: 12px;
-        }
-
-        /* Nút chụp hình & Thư viện ảnh */
-        .btn-capture { 
-            width: 100%; background: var(--success); color: white; border: none; padding: 14px; 
-            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem;
-            display: flex; justify-content: center; align-items: center; gap: 8px;
-        }
-
-        .photo-grid { 
-            margin-top: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; 
-        }
-        
+        .photo-grid { margin-top: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .photo-card { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 4px; text-align: center; }
-        .photo-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; }
-        .photo-card span { display: block; font-size: 0.6rem; color: #999; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; }
+        .photo-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 6px; }
+        .photo-card span { display: block; font-size: 0.6rem; color: #999; margin-top: 4px; }
 
-        /* Nút xóa cuối trang */
-        .btn-reset { 
-            margin: 30px 0; width: 100%; background: #fff; color: var(--danger); border: 2px solid var(--danger);
-            padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
-        }
-
-        .pass { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; display: block; }
-        .fail { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; display: block; }
-
-        /* Icon xoay */
-        .icon-arrow { transition: transform 0.3s; width: 18px; height: 18px; }
+        .pass { background: #d4edda; color: #155724; }
+        .fail { background: #f8d7da; color: #721c24; }
+        .icon-arrow { transition: transform 0.3s; width: 16px; height: 16px; }
         .active .icon-arrow { transform: rotate(180deg); }
     </style>
 </head>
@@ -107,46 +60,68 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            I. CHÁY NỔ & THOÁT NẠN
-            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            I. CHÁY NỔ & THOÁT NẠN (FIRE SAFETY)
+            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
         </div>
         <div class="category-content">
             
-            <div class="check-item" data-id="mobile_exit">
+            <div class="check-item" data-id="v19_aisle">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.1 Bề rộng cửa & Lối thoát
-                    <svg class="icon-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                    1.1 Đường thoát nạn & Hành lang
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="item-content">
-                    <div class="calc-box">
-                        <h4>Công cụ tính (5mm/người)</h4>
-                        <div class="calc-group">
-                            <label>Số người:</label>
-                            <input type="number" class="calc-input" id="p_count" oninput="runExitCalc()">
-                        </div>
-                        <div class="calc-group">
-                            <label>Rộng thực tế (mm):</label>
-                            <input type="number" class="calc-input" id="w_actual" oninput="runExitCalc()">
-                        </div>
-                        <div id="res_exit" class="calc-result"></div>
-                    </div>
-                    <div class="standard-info">Tiêu chuẩn: Cửa min 810mm, Hành lang min 915mm. Khoảng cách thoát nạn 61m-76m.</div>
-                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi chú hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_Exit')" style="display:none">
+                    <ul class="std-list">
+                        <li>Rộng tối thiểu <b class="std-important">915mm</b> xuyên suốt.</li>
+                        <li>Khoảng cách di chuyển max <b class="std-important">61m</b> (ko sprinkler) / <b class="std-important">76m</b> (có).</li>
+                        <li>Độ dốc sàn không vượt quá 10 độ.</li>
+                        <li>Không có vật cản, hàng hóa, thiết bị lấn chiếm.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi nhận hiện trạng thực tế..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_LoiDi')" style="display:none">
                     <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
                     <div class="photo-grid"></div>
                 </div>
             </div>
 
-            <div class="check-item" data-id="mobile_firewall">
+            <div class="check-item" data-id="v19_exit_door">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    1.2 Ngăn cháy & Kho hóa chất
-                    <svg class="icon-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                    1.2 Cửa thoát nạn & Cơ chế mở
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="item-content">
-                    <div class="standard-info">Ngăn cháy 1h-2h. Cửa ngăn cháy tự đóng. Kho hóa chất có khay chứa cao min 100mm.</div>
-                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi chú hiện trạng..."></textarea>
-                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_Fire')" style="display:none">
+                    <div class="calc-box">
+                        <div class="calc-group"><label>Số người khu vực:</label><input type="number" class="calc-input" id="p_v19" oninput="calcV19()"></div>
+                        <div class="calc-group"><label>Rộng cửa đo được (mm):</label><input type="number" class="calc-input" id="w_v19" oninput="calcV19()"></div>
+                        <div id="res_v19" class="calc-result"></div>
+                    </div>
+                    <ul class="std-list">
+                        <li>Mở theo hướng thoát, <b class="std-important">không dùng cửa trượt/cuốn</b>.</li>
+                        <li>Cửa phải mở được <b class="std-important">không cần chìa khóa</b> hay dụng cụ đặc biệt.</li>
+                        <li>Lực đẩy cửa không quá 67N (mở chốt) và 133N (mở hoàn toàn).</li>
+                        <li>Thanh đẩy Panic bắt buộc cho phòng > 50 người.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Kiểm tra khóa xích, chốt chặn, hướng mở..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_Cua')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
+                    <div class="photo-grid"></div>
+                </div>
+            </div>
+
+            <div class="check-item" data-id="v19_fire_wall">
+                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
+                    1.3 Ngăn cháy & Hệ thống PCCC
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="item-content">
+                    <ul class="std-list">
+                        <li>Tường ngăn cháy 1h (nhà < 4 tầng) hoặc 2h (nhà >= 4 tầng).</li>
+                        <li>Cửa ngăn cháy có bộ phận tự đóng và gioăng ngăn khói.</li>
+                        <li>Đèn Exit đặt cách đối tượng < 2m. Đèn sự cố sáng ít nhất 90p.</li>
+                        <li>Chuông báo cháy âm lượng > 15dBA so với môi trường.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Kiểm tra lỗ hổng tường ngăn cháy, đèn sự cố..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'PCCC_NganChay')" style="display:none">
                     <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
                     <div class="photo-grid"></div>
                 </div>
@@ -156,30 +131,46 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            II. AN TOÀN ĐIỆN
-            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            II. AN TOÀN ĐIỆN (ELECTRICAL SAFETY)
+            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
         </div>
         <div class="category-content">
-            <div class="check-item" data-id="mobile_thermal">
+            <div class="check-item" data-id="v19_elec_panel">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    2.1 Đo nhiệt độ (IR)
-                    <svg class="icon-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                    2.1 Tủ điện & Phòng máy
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="item-content">
+                    <ul class="std-list">
+                        <li>Khoảng trống an toàn trước tủ <b class="std-important">min 915mm</b>.</li>
+                        <li>Sạch xơ bụi vải, không chứa rác/vật liệu dễ cháy bên trong.</li>
+                        <li>Có nắp che chắn (dead front) bảo vệ các cực điện hở.</li>
+                        <li>Có sơ đồ đơn tuyến và biển cảnh báo nguy hiểm.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Kiểm tra vệ sinh, nắp che, vật cản..."></textarea>
+                    <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Elec_TuDien')" style="display:none">
+                    <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
+                    <div class="photo-grid"></div>
+                </div>
+            </div>
+
+            <div class="check-item" data-id="v19_elec_temp">
+                <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
+                    2.2 Kiểm tra Nhiệt độ (IR)
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="item-content">
                     <div class="calc-box">
-                        <h4>Máy tính Delta T</h4>
-                        <div class="calc-group">
-                            <label>T. Môi trường (°C):</label>
-                            <input type="number" class="calc-input" id="t_env" oninput="runTempCalc()">
-                        </div>
-                        <div class="calc-group">
-                            <label>T. Điểm nóng (°C):</label>
-                            <input type="number" class="calc-input" id="t_hot" oninput="runTempCalc()">
-                        </div>
-                        <div id="res_temp" class="calc-result"></div>
+                        <div class="calc-group"><label>T. Môi trường (°C):</label><input type="number" class="calc-input" id="t_env_v19" oninput="calcTempV19()"></div>
+                        <div class="calc-group"><label>T. Điểm nóng (°C):</label><input type="number" class="calc-input" id="t_hot_v19" oninput="calcTempV19()"></div>
+                        <div id="res_temp_v19" class="calc-result"></div>
                     </div>
-                    <div class="standard-info">Hành động ngay khi T > 70°C hoặc Delta T > 30°C. Theo dõi nếu Delta T > 20°C.</div>
-                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi chú hiện trạng..."></textarea>
+                    <ul class="std-list">
+                        <li>Hành động ngay: T > 70°C hoặc Delta T > 30°C.</li>
+                        <li>Theo dõi: Delta T > 20°C.</li>
+                        <li>Đo khi tải tối thiểu 40% công suất thiết kế.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi nhận điểm quá nhiệt, vị trí tủ..."></textarea>
                     <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Elec_IR')" style="display:none">
                     <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
                     <div class="photo-grid"></div>
@@ -190,18 +181,23 @@
 
     <div class="category">
         <div class="category-header" onclick="toggleAccordion(this, 'category')">
-            III. KẾT CẤU CÔNG TRÌNH
-            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            III. KẾT CẤU CÔNG TRÌNH (STRUCTURAL)
+            <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
         </div>
         <div class="category-content">
-            <div class="check-item" data-id="mobile_struct">
+            <div class="check-item" data-id="v19_struct">
                 <div class="item-header" onclick="toggleAccordion(this, 'check-item')">
-                    3.1 Vết nứt & Tải trọng
-                    <svg class="icon-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                    3.1 Biến dạng & Lan can
+                    <svg class="icon-arrow" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="item-content">
-                    <div class="standard-info">Kiểm tra vết nứt cột, dầm, sàn. Lan can cao min 1050mm. Bậc thang max 215mm.</div>
-                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi chú hiện trạng..."></textarea>
+                    <ul class="std-list">
+                        <li>Vết nứt dầm/cột: Nứt chéo (nguy hiểm), nứt dọc (cần theo dõi).</li>
+                        <li>Lan can: Cao <b class="std-important">min 1065mm</b>, khe hở < 100mm.</li>
+                        <li>Bậc thang: Cao max 215mm, sâu min 230mm. Chênh lệch < 5mm.</li>
+                        <li>Tải trọng: Không chất hàng cao quá giới hạn vạch kẻ sàn.</li>
+                    </ul>
+                    <textarea class="data-input" oninput="saveData()" placeholder="Ghi nhận vết nứt, lan can, tải trọng sàn..."></textarea>
                     <input type="file" accept="image/*" capture="environment" multiple onchange="handleFiles(this, 'Struct')" style="display:none">
                     <button class="btn-capture" onclick="this.previousElementSibling.click()">📷 CHỤP HÌNH / CHỌN ẢNH</button>
                     <div class="photo-grid"></div>
@@ -210,107 +206,91 @@
         </div>
     </div>
 
-    <button class="btn-reset" onclick="resetApp()">XÓA DỮ LIỆU ĐỂ LÀM BÁO CÁO MỚI</button>
+    <button style="margin:20px 0; width:100%; padding:15px; color:var(--danger); border:2px solid var(--danger); background:#fff; border-radius:10px; font-weight:bold;" onclick="resetApp()">XÓA DỮ LIỆU BÁO CÁO</button>
 
     <script>
-        const KEY = 'LABS_MOBILE_V18';
-
+        const STORE = 'LABS_V19_DATA';
         function toggleAccordion(el, type) {
-            const parent = el.parentElement;
-            const isActive = parent.classList.contains('active');
-            parent.parentElement.querySelectorAll(':scope > .' + type).forEach(s => s.classList.remove('active'));
-            if (!isActive) parent.classList.add('active');
+            const p = el.parentElement;
+            const active = p.classList.contains('active');
+            p.parentElement.querySelectorAll(':scope > .' + type).forEach(s => s.classList.remove('active'));
+            if (!active) p.classList.add('active');
         }
 
-        // --- Calculators ---
-        function runExitCalc() {
-            const p = document.getElementById('p_count').value;
-            const a = document.getElementById('w_actual').value;
-            const res = document.getElementById('res_exit');
-            if(!p || !a) return;
+        // --- Logic tính toán ---
+        function calcV19() {
+            const p = document.getElementById('p_v19').value;
+            const w = document.getElementById('w_v19').value;
+            const res = document.getElementById('res_v19');
+            if(!p || !w) return;
             const req = Math.max(810, p * 5);
             res.style.display = 'block';
-            res.className = 'calc-result ' + (a >= req ? 'pass' : 'fail');
-            res.innerText = (a >= req ? 'ĐẠT' : 'KHÔNG ĐẠT') + ` (Cần ${req}mm)`;
+            res.className = 'calc-result ' + (w >= req ? 'pass' : 'fail');
+            res.innerText = (w >= req ? 'ĐẠT' : 'KHÔNG ĐẠT') + ` (Yêu cầu: ${req}mm)`;
         }
 
-        function runTempCalc() {
-            const env = parseFloat(document.getElementById('t_env').value);
-            const hot = parseFloat(document.getElementById('t_hot').value);
-            const res = document.getElementById('res_temp');
-            if(isNaN(env) || isNaN(hot)) return;
-            const dt = hot - env;
+        function calcTempV19() {
+            const e = parseFloat(document.getElementById('t_env_v19').value);
+            const h = parseFloat(document.getElementById('t_hot_v19').value);
+            const res = document.getElementById('res_temp_v19');
+            if(isNaN(e) || isNaN(h)) return;
+            const dt = h - e;
             res.style.display = 'block';
-            if(hot > 70 || dt > 30) {
-                res.className = 'calc-result fail';
-                res.innerText = `NGUY HIỂM! Delta T: ${dt.toFixed(1)}°C`;
-            } else if(dt > 20) {
-                res.className = 'calc-result fail'; res.style.background = '#fff3cd';
-                res.innerText = `CẢNH BÁO. Delta T: ${dt.toFixed(1)}°C`;
-            } else {
-                res.className = 'calc-result pass';
-                res.innerText = `AN TOÀN. Delta T: ${dt.toFixed(1)}°C`;
-            }
+            if(h > 70 || dt > 30) { res.className = 'calc-result fail'; res.innerText = `NGUY HIỂM! Delta T: ${dt.toFixed(1)}°C`; }
+            else if(dt > 20) { res.className = 'calc-result fail'; res.style.background = '#fff3cd'; res.innerText = `CẢNH BÁO. Delta T: ${dt.toFixed(1)}°C`; }
+            else { res.className = 'calc-result pass'; res.innerText = `AN TOÀN. Delta T: ${dt.toFixed(1)}°C`; }
         }
 
-        // --- Data & Images ---
+        // --- Dữ liệu & Ảnh ---
         function handleFiles(input, label) {
             const grid = input.parentElement.querySelector('.photo-grid');
             const files = Array.from(input.files);
             const date = new Date().toLocaleDateString('vi-VN').replace(/\//g, '');
-
-            files.forEach((file, i) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
+            files.forEach(f => {
+                const r = new FileReader();
+                r.onload = (e) => {
                     const name = `${date}_${label}_${Date.now().toString().slice(-4)}.jpg`;
-                    addImg(grid, e.target.result, name);
+                    const d = document.createElement('div');
+                    d.className = 'photo-card';
+                    d.innerHTML = `<img src="${e.target.result}"><span>${name}</span>`;
+                    grid.appendChild(d);
                     saveData();
                 };
-                reader.readAsDataURL(file);
+                r.readAsDataURL(f);
             });
-        }
-
-        function addImg(grid, src, name) {
-            const div = document.createElement('div');
-            div.className = 'photo-card';
-            div.innerHTML = `<img src="${src}"><span>${name}</span>`;
-            grid.appendChild(div);
         }
 
         function saveData() {
-            const data = {};
+            const d = {};
             document.querySelectorAll('.check-item').forEach(it => {
-                const id = it.dataset.id;
-                data[id] = {
-                    text: it.querySelector('textarea').value,
-                    imgs: Array.from(it.querySelectorAll('.photo-card')).map(c => ({
-                        s: c.querySelector('img').src, n: c.querySelector('span').innerText
-                    }))
+                d[it.dataset.id] = {
+                    t: it.querySelector('textarea').value,
+                    i: Array.from(it.querySelectorAll('.photo-card')).map(c => ({s: c.querySelector('img').src, n: c.querySelector('span').innerText}))
                 };
             });
-            localStorage.setItem(KEY, JSON.stringify(data));
+            localStorage.setItem(STORE, JSON.stringify(d));
         }
 
         function loadData() {
-            const saved = localStorage.getItem(KEY);
-            if (!saved) return;
-            const data = JSON.parse(saved);
-            Object.keys(data).forEach(id => {
-                const it = document.querySelector(`[data-id="${id}"]`);
+            const s = localStorage.getItem(STORE);
+            if (!s) return;
+            const d = JSON.parse(s);
+            Object.keys(d).forEach(k => {
+                const it = document.querySelector(`[data-id="${k}"]`);
                 if(it) {
-                    it.querySelector('textarea').value = data[id].text;
-                    data[id].imgs.forEach(img => addImg(it.querySelector('.photo-grid'), img.s, img.n));
+                    it.querySelector('textarea').value = d[k].t;
+                    d[k].i.forEach(img => {
+                        const grid = it.querySelector('.photo-grid');
+                        const div = document.createElement('div');
+                        div.className = 'photo-card';
+                        div.innerHTML = `<img src="${img.s}"><span>${img.n}</span>`;
+                        grid.appendChild(div);
+                    });
                 }
             });
         }
 
-        function resetApp() {
-            if(confirm('Xóa sạch dữ liệu báo cáo này?')) {
-                localStorage.removeItem(KEY);
-                location.reload();
-            }
-        }
-
+        function resetApp() { if(confirm('Xóa sạch báo cáo này?')) { localStorage.removeItem(STORE); location.reload(); } }
         window.onload = loadData;
     </script>
 </body>
