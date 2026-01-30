@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực hành xưởng LABS - Version 1.0</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #f4f4f9; }
+        h1 { color: #2c3e50; text-align: center; }
+        .category { background: #fff; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; }
+        .category-header { background: #3498db; color: white; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .category-content { display: none; padding: 15px; border-top: 1px solid #eee; }
+        .check-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dotted #ccc; }
+        .check-item:last-child { border-bottom: none; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #34495e; }
+        textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .photo-container { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .photo-preview { width: 100px; height: 100px; object-fit: cover; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-capture { background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 5px; }
+        .btn-capture:hover { background: #219150; }
+        .status { font-size: 0.9em; color: #7f8c8d; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Thực hành xưởng LABS</h1>
+
+    <div class="category">
+        <div class="category-header" onclick="toggleCategory(this)">
+            1. AN TOÀN KẾT CẤU (STRUCTURAL SAFETY) <span>▼</span>
+        </div>
+        <div class="category-content">
+            <div class="check-item">
+                [span_3](start_span)<label>1.1 Kiểm tra vết nứt trên dầm và cột[span_3](end_span)</label>
+                <textarea placeholder="Ghi nhận hiện trạng vết nứt, độ rộng..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'KetCau_VetNut')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+            <div class="check-item">
+                [span_4](start_span)<label>1.2 Kiểm tra tải trọng làm việc so với thiết kế[span_4](end_span)</label>
+                <textarea placeholder="Kiểm tra việc sắp xếp hàng hóa, máy móc..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'KetCau_TaiTrong')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header" onclick="toggleCategory(this)">
+            2. AN TOÀN CHÁY NỔ (FIRE SAFETY) <span>▼</span>
+        </div>
+        <div class="category-content">
+            <div class="check-item">
+                [span_5](start_span)[span_6](start_span)<label>2.1 Lối thoát nạn và cửa thoát hiểm[span_5](end_span)[span_6](end_span)</label>
+                <textarea placeholder="Thông thoáng, không bị khóa xích, mở theo hướng thoát..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_LoiThoat')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+            <div class="check-item">
+                [span_7](start_span)[span_8](start_span)<label>2.2 Biển báo chỉ dẫn và Đèn chiếu sáng sự cố[span_7](end_span)[span_8](end_span)</label>
+                <textarea placeholder="Kiểm tra độ sáng, vị trí lắp đặt, hoạt động khi mất điện..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_BienBao')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+            <div class="check-item">
+                [span_9](start_span)[span_10](start_span)<label>2.3 Ngăn cháy lan (Kho hóa chất, Kho tạm)[span_9](end_span)[span_10](end_span)</label>
+                <textarea placeholder="Kiểm tra tường ngăn cháy, khay chống tràn hóa chất..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'PCCC_NganChay')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header" onclick="toggleCategory(this)">
+            3. AN TOÀN ĐIỆN (ELECTRICAL SAFETY) <span>▼</span>
+        </div>
+        <div class="category-content">
+            <div class="check-item">
+                [span_11](start_span)[span_12](start_span)<label>3.1 Tủ điện và Thiết bị đóng cắt[span_11](end_span)[span_12](end_span)</label>
+                <textarea placeholder="Kiểm tra xơ bụi vải, vật liệu dễ cháy trong tủ, nắp che..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Dien_TuDien')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+            <div class="check-item">
+                [span_13](start_span)[span_14](start_span)<label>3.2 Kiểm tra nhiệt độ bằng Camera nhiệt[span_13](end_span)[span_14](end_span)</label>
+                <textarea placeholder="Ghi nhận các điểm quá nhiệt (>30°C so với môi trường)..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Dien_NhietDo')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+            <div class="check-item">
+                [span_15](start_span)[span_16](start_span)<label>3.3 Hệ thống nối đất và Tiếp địa[span_15](end_span)[span_16](end_span)</label>
+                <textarea placeholder="Kiểm tra tình trạng dây tiếp địa, điểm đấu nối..."></textarea>
+                <input type="file" accept="image/*" multiple onchange="handleFiles(this, 'Dien_TiepDia')" style="display:none">
+                <button class="btn-capture" onclick="this.previousElementSibling.click()">Chụp/Chọn hình</button>
+                <div class="photo-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hàm thu gọn/mở rộng
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            const span = header.querySelector('span');
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                span.innerText = "▼";
+            } else {
+                content.style.display = "block";
+                span.innerText = "▲";
+            }
+        }
+
+        // Hàm xử lý ảnh và đặt tên theo ngày + mục
+        function handleFiles(input, itemName) {
+            const container = input.parentElement.querySelector('.photo-container');
+            const files = input.files;
+            const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                
+                // Giả lập việc đổi tên hình khi lưu (hiển thị thông tin)
+                const fileNameCustom = `${date}_${itemName}_${i+1}.jpg`;
+                
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.style.textAlign = "center";
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'photo-preview';
+                    
+                    const nameLabel = document.createElement('div');
+                    nameLabel.className = 'status';
+                    nameLabel.innerText = fileNameCustom;
+                    
+                    div.appendChild(img);
+                    div.appendChild(nameLabel);
+                    container.appendChild(div);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
